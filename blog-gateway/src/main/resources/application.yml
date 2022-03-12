@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: blog-gateway
+  cloud:
+    gateway:
+      routes:
+        #用户路由
+        - id: user_route
+          uri: lb://blog-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
