@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = {"com.youlixiang.blog.common"})
+@ComponentScan(basePackages = {"com.youlixiang.blog"})
 @MapperScan(basePackages = {"com.youlixiang.blog.user.mapper"})
 public class UserApplication {
     public static void main(String[] args) {

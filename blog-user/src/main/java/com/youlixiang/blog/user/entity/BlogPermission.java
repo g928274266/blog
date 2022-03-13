@@ -46,11 +46,11 @@ public class BlogPermission implements Serializable {
 
     @ApiModelProperty(value = "增加时间")
     @TableField(fill = FieldFill.INSERT)
-    private Date gmtCreated;
+    private String gmtCreated;
 
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date gmtModified;
+    private String gmtModified;
 
 
 }

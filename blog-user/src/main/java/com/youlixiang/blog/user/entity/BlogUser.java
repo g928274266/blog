@@ -1,13 +1,17 @@
 package com.youlixiang.blog.user.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.youlixiang.blog.common.validate.InsertGroup;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
@@ -55,11 +59,11 @@ public class BlogUser implements Serializable {
 
     @ApiModelProperty(value = "增加时间")
     @TableField(fill = FieldFill.INSERT)
-    private Date gmtCreated;
+    private String gmtCreated;
 
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date gmtModified;
+    private String gmtModified;
 
 
 }

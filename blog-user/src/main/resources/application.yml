@@ -4,3 +4,5 @@ spring:
 mybatis-plus:
   mapper-locations: /com/youlixiang/blog/user/mapper/xml/*.xml
   type-aliases-package: com.youlixiang.blog.user.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

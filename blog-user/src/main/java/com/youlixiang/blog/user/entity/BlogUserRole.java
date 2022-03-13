@@ -1,6 +1,8 @@
 package com.youlixiang.blog.user.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,7 +10,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
@@ -39,10 +40,12 @@ public class BlogUserRole implements Serializable {
     private Integer logicDeleted;
 
     @ApiModelProperty(value = "增加时间")
-    private Date gmtCreated;
+    @TableField(fill = FieldFill.INSERT)
+    private String gmtCreated;
 
     @ApiModelProperty(value = "更新时间")
-    private Date gmtModified;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private String gmtModified;
 
 
 }
