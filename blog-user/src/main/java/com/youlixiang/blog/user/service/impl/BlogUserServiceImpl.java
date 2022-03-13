@@ -7,6 +7,7 @@ import com.youlixiang.blog.common.constant.RegisterErrorEnum;
 import com.youlixiang.blog.common.util.JwtUtils;
 import com.youlixiang.blog.user.entity.BlogUser;
 import com.youlixiang.blog.user.exception.CustomException;
+import com.youlixiang.blog.user.mapper.BlogUserMapper;
 import com.youlixiang.blog.user.service.BlogUserService;
 import com.youlixiang.blog.user.util.BcryptEncoderUtils;
 import com.youlixiang.blog.user.vo.LoginVO;

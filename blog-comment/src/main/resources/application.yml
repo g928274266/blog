@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: blog-comment
+mybatis-plus:
+  mapper-locations: /com/youlixiang/blog/comment/mapper/xml/*.xml
+  type-aliases-package: com.youlixiang.blog.user.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
