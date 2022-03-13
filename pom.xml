@@ -41,6 +41,7 @@
         <fastjson.version>1.2.78</fastjson.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <hibernate-validator.version>6.2.0.Final</hibernate-validator.version>
+        <jwt.version>0.7.0</jwt.version>
     </properties>
 
     <dependencyManagement>
@@ -128,6 +129,13 @@
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
+            </dependency>
+
+            <!-- jwt -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
             </dependency>
 
         </dependencies>

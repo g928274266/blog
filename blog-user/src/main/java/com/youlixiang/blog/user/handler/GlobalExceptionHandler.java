@@ -2,7 +2,7 @@ package com.youlixiang.blog.user.handler;
 
 import com.youlixiang.blog.common.constant.RegisterErrorEnum;
 import com.youlixiang.blog.common.util.CommonResult;
-import com.youlixiang.blog.user.exception.RegisterException;
+import com.youlixiang.blog.user.exception.CustomException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -42,8 +42,8 @@ public class GlobalExceptionHandler {
      * @param e 注册异常
      * @return 通用返回
      */
-    @ExceptionHandler(value = {RegisterException.class})
-    public CommonResult registerExceptionHandler(RegisterException e) {
+    @ExceptionHandler(value = {CustomException.class})
+    public CommonResult registerExceptionHandler(CustomException e) {
         return CommonResult.error(e.getCode(), e.getMessage());
     }
 }

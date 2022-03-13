@@ -3,13 +3,12 @@ package com.youlixiang.blog.user.vo;
 import com.youlixiang.blog.common.validate.InsertGroup;
 import lombok.Data;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * 用户注册Vo
+ * 用户注册VO
  *
  * @Author 郭非
  * @Date 2022/3/12
@@ -17,7 +16,7 @@ import javax.validation.constraints.Size;
  * @Version 1.0
  */
 @Data
-public class RegisterVo {
+public class RegisterVO {
     /**
      * 用户名
      */
