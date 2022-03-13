@@ -10,15 +10,15 @@ public enum RegisterErrorEnum {
     /**
      * 用户名重复
      */
-    DUPLICATE_USERNAME(401, "用户名重复"),
+    DUPLICATE_USERNAME(20001, "用户名重复"),
     /**
      * 两次密码输入不一致
      */
-    PASSWORD_NOT_EQUAL(402, "两次输入密码不同"),
+    PASSWORD_NOT_EQUAL(20002, "两次输入密码不同"),
     /**
      * 参数校验错误
      */
-    ARGUMENT_NOT_VALID(403, "参数校验错误");
+    ARGUMENT_NOT_VALID(20003, "参数校验错误");
 
     private final int code;
 
