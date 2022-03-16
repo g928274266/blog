@@ -1,6 +1,8 @@
 package com.youlixiang.blog.user.exception;
 
 /**
+ * 自定义异常类
+ *
  * @Author 郭非
  * @Date 2022/3/13
  * @Time 14:13

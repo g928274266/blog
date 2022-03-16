@@ -3,6 +3,8 @@ package com.youlixiang.blog.user.util;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
+ * 密码加密工具类
+ *
  * @Author 郭非
  * @Date 2022/3/13
  * @Time 14:20

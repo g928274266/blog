@@ -1,10 +1,11 @@
 package com.youlixiang.blog.user.controller;
 
 import com.youlixiang.blog.common.util.CommonResult;
-import com.youlixiang.blog.common.util.JwtUtils;
 import com.youlixiang.blog.common.validate.InsertGroup;
 import com.youlixiang.blog.user.exception.CustomException;
 import com.youlixiang.blog.user.service.BlogUserService;
+import com.youlixiang.blog.user.util.CheckLoginUtils;
+import com.youlixiang.blog.user.vo.BlogUserVO;
 import com.youlixiang.blog.user.vo.LoginVO;
 import com.youlixiang.blog.user.vo.RegisterVO;
 import io.swagger.annotations.Api;
@@ -14,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * <p>
@@ -35,10 +37,12 @@ public class BlogUserController {
      *
      * @param registerVO 注册信息
      * @return 通用返回
+     * @throws CustomException 异常
      */
     @ApiOperation(value = "用户注册")
     @PostMapping("/register")
-    public CommonResult register(@Validated(value = {InsertGroup.class}) @RequestBody RegisterVO registerVO) throws CustomException {
+    public CommonResult register(@Validated(value = {InsertGroup.class})
+                                 @RequestBody RegisterVO registerVO) throws CustomException {
         blogUserService.register(registerVO);
         return CommonResult.success("注册成功");
     }
@@ -46,14 +50,62 @@ public class BlogUserController {
     /**
      * 通过用户名登录
      *
-     * @param loginVO 登录信息
+     * @param loginVO 通过用户名登录
      * @return 通用返回
+     * @throws CustomException 异常
      */
     @ApiOperation(value = "通过用户名登录")
     @PostMapping("/login")
-    public CommonResult login(@RequestBody LoginVO loginVO) throws CustomException {
+    public CommonResult login(@Valid @RequestBody LoginVO loginVO) throws CustomException {
         String token = blogUserService.loginById(loginVO);
         return CommonResult.success().put("token", token);
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @return 通用返回
+     * @throws CustomException 异常
+     */
+    @ApiOperation(value = "获取用户信息")
+    @GetMapping("/getInfo")
+    public CommonResult getInfo() throws CustomException {
+        String username = "youlixiang";
+        BlogUserVO userVo = blogUserService.getInfo(username);
+        return CommonResult.success().put("userVo", userVo);
+    }
+
+    /**
+     * 更新头像
+     *
+     * @param request 请求
+     * @param url     头像地址
+     * @return 通用返回
+     * @throws CustomException 异常
+     */
+    @ApiOperation(value = "更新头像")
+    @PostMapping("/updateAvatar")
+    public CommonResult uploadAvatar(HttpServletRequest request,
+                                     @RequestParam(value = "url") String url) throws CustomException {
+        String username = CheckLoginUtils.isLogin(request);
+        blogUserService.updateAvatar(username, url);
+        return CommonResult.success("上传头像成功");
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param request 请求
+     * @param userVO  用户信息
+     * @return 通用返回
+     * @throws CustomException 一查昂
+     */
+    @ApiOperation(value = "更新用户信息")
+    @PostMapping("/uploadInfo")
+    public CommonResult uploadInfo(HttpServletRequest request, BlogUserVO userVO) throws CustomException {
+        String username = CheckLoginUtils.isLogin(request);
+        blogUserService.uploadInfo(username, userVO);
+        return CommonResult.success("更新信息成功");
     }
 }
 

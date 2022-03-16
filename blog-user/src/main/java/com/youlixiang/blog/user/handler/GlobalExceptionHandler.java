@@ -1,6 +1,6 @@
 package com.youlixiang.blog.user.handler;
 
-import com.youlixiang.blog.common.constant.RegisterErrorEnum;
+import com.youlixiang.blog.common.constant.UserErrorEnum;
 import com.youlixiang.blog.common.util.CommonResult;
 import com.youlixiang.blog.user.exception.CustomException;
 import org.springframework.validation.BindingResult;
@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 全局异常处理器
+ *
  * @Author 郭非
  * @Date 2022/3/13
  * @Time 10:48
@@ -32,8 +34,8 @@ public class GlobalExceptionHandler {
         bindingResult.getFieldErrors().forEach((item) -> {
             errorMap.put(item.getField(), item.getDefaultMessage());
         });
-        return CommonResult.error(RegisterErrorEnum.ARGUMENT_NOT_VALID.getCode()
-                , RegisterErrorEnum.ARGUMENT_NOT_VALID.getMessage() + ",原因是:" + errorMap);
+        return CommonResult.error(UserErrorEnum.ARGUMENT_NOT_VALID.getCode()
+                , UserErrorEnum.ARGUMENT_NOT_VALID.getMessage() + ",原因是:" + errorMap);
     }
 
     /**

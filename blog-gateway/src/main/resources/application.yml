@@ -11,3 +11,17 @@ spring:
             - Path=/user/**
           filters:
             - StripPrefix=1
+        #文章路由
+        - id: article_route
+          uri: lb://blog-article
+          predicates:
+            - Path=/article/**
+          filters:
+            - StripPrefix=1
+        #oss路由
+        - id: oss_route
+          uri: lb://blog-oss
+          predicates:
+            - Path=/oss/**
+          filters:
+            - StripPrefix=1

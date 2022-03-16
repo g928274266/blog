@@ -1,21 +1,16 @@
 package com.youlixiang.blog.user.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.youlixiang.blog.common.validate.InsertGroup;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
  * <p>
- *
+ * 用户
  * </p>
  *
  * @author 郭非
@@ -52,6 +47,21 @@ public class BlogUser implements Serializable {
 
     @ApiModelProperty(value = "头像地址")
     private String avatarUrl;
+
+    @ApiModelProperty(value = "qq")
+    private String qq;
+
+    @ApiModelProperty(value = "gitee")
+    private String gitee;
+
+    @ApiModelProperty(value = "github")
+    private String github;
+
+    @ApiModelProperty(value = "csdn")
+    private String csdn;
+
+    @ApiModelProperty(value = "slogan")
+    private String slogan;
 
     @ApiModelProperty(value = "逻辑删除(0未删除 1已删除)")
     @TableLogic

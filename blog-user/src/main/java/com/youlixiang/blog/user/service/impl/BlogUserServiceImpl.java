@@ -2,14 +2,14 @@ package com.youlixiang.blog.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.youlixiang.blog.common.constant.LoginErrorEnum;
-import com.youlixiang.blog.common.constant.RegisterErrorEnum;
+import com.youlixiang.blog.common.constant.UserErrorEnum;
 import com.youlixiang.blog.common.util.JwtUtils;
 import com.youlixiang.blog.user.entity.BlogUser;
 import com.youlixiang.blog.user.exception.CustomException;
 import com.youlixiang.blog.user.mapper.BlogUserMapper;
 import com.youlixiang.blog.user.service.BlogUserService;
 import com.youlixiang.blog.user.util.BcryptEncoderUtils;
+import com.youlixiang.blog.user.vo.BlogUserVO;
 import com.youlixiang.blog.user.vo.LoginVO;
 import com.youlixiang.blog.user.vo.RegisterVO;
 import org.springframework.beans.BeanUtils;
@@ -39,16 +39,16 @@ public class BlogUserServiceImpl extends ServiceImpl<BlogUserMapper, BlogUser> i
         int count = blogUserMapper.selectCount(blogUserQueryWrapper);
 
         if (count > 0) {
-            throw new CustomException(RegisterErrorEnum.DUPLICATE_USERNAME.getCode(),
-                    RegisterErrorEnum.DUPLICATE_USERNAME.getMessage());
+            throw new CustomException(UserErrorEnum.DUPLICATE_USERNAME.getCode(),
+                    UserErrorEnum.DUPLICATE_USERNAME.getMessage());
         }
 
         String password = registerVO.getPassword();
         String confirmPassword = registerVO.getConfirmPassword();
 
         if (!password.equals(confirmPassword)) {
-            throw new CustomException(RegisterErrorEnum.PASSWORD_NOT_EQUAL.getCode(),
-                    RegisterErrorEnum.PASSWORD_NOT_EQUAL.getMessage());
+            throw new CustomException(UserErrorEnum.PASSWORD_NOT_EQUAL.getCode(),
+                    UserErrorEnum.PASSWORD_NOT_EQUAL.getMessage());
         }
 
         //将密码MD5盐值加密
@@ -72,8 +72,8 @@ public class BlogUserServiceImpl extends ServiceImpl<BlogUserMapper, BlogUser> i
         BlogUser blogUser = blogUserMapper.selectOne(blogUserQueryWrapper);
 
         if (blogUser == null) {
-            throw new CustomException(LoginErrorEnum.USER_NOT_EXIST.getCode()
-                    , LoginErrorEnum.USER_NOT_EXIST.getMessage());
+            throw new CustomException(UserErrorEnum.USER_NOT_EXIST.getCode()
+                    , UserErrorEnum.USER_NOT_EXIST.getMessage());
         }
 
         //密码匹配
@@ -81,11 +81,59 @@ public class BlogUserServiceImpl extends ServiceImpl<BlogUserMapper, BlogUser> i
         String encodedPassword = blogUser.getPassword();
 
         if (!BcryptEncoderUtils.match(password, encodedPassword)) {
-            throw new CustomException(LoginErrorEnum.PASSWORD_NOT_CORRECT.getCode(),
-                    LoginErrorEnum.PASSWORD_NOT_CORRECT.getMessage());
+            throw new CustomException(UserErrorEnum.PASSWORD_NOT_CORRECT.getCode(),
+                    UserErrorEnum.PASSWORD_NOT_CORRECT.getMessage());
         }
 
         //返回登录token
         return JwtUtils.getJwtToken(username);
+    }
+
+    @Override
+    public BlogUserVO getInfo(String username) throws CustomException {
+        BlogUser blogUser = getBlogUserByUsername(username);
+
+        BlogUserVO userVo = new BlogUserVO();
+
+        BeanUtils.copyProperties(blogUser, userVo);
+
+        return userVo;
+    }
+
+    @Override
+    public void updateAvatar(String username, String url) throws CustomException {
+        BlogUser blogUser = getBlogUserByUsername(username);
+
+        blogUser.setAvatarUrl(url);
+
+        blogUserMapper.updateById(blogUser);
+    }
+
+    @Override
+    public void uploadInfo(String username, BlogUserVO userVO) {
+        String voName = userVO.getUsername();
+
+        if (!username.equals(voName)) {
+            return;
+        }
+
+        BlogUser blogUser = new BlogUser();
+
+        BeanUtils.copyProperties(userVO, blogUser);
+
+        blogUserMapper.updateById(blogUser);
+    }
+
+    private BlogUser getBlogUserByUsername(String username) throws CustomException {
+        QueryWrapper<BlogUser> blogUserQueryWrapper = new QueryWrapper<>();
+        blogUserQueryWrapper.eq("username", username);
+
+        BlogUser blogUser = blogUserMapper.selectOne(blogUserQueryWrapper);
+
+        if (blogUser == null) {
+            throw new CustomException(UserErrorEnum.NOT_SUCH_USER.getCode(),
+                    UserErrorEnum.NOT_SUCH_USER.getMessage());
+        }
+        return blogUser;
     }
 }

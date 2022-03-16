@@ -12,6 +12,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import java.util.ArrayList;
 
 /**
+ * Swagger配置类
+ *
  * @Author 郭非
  * @Date 2022/3/12
  * @Time 22:03

@@ -25,6 +25,7 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
     public List<SwaggerResource> get() {
         List<SwaggerResource> resources = new ArrayList<>();
         resources.add(swaggerResource("用户模块", "/user/v2/api-docs"));
+        resources.add(swaggerResource("oss模块", "/oss/v2/api-docs"));
         return resources;
     }
 

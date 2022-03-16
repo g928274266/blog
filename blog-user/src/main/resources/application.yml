@@ -6,3 +6,8 @@ mybatis-plus:
   type-aliases-package: com.youlixiang.blog.user.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+feign:
+  httpclient:
+    enabled: true
+    connection-timeout: 50000
+    connection-timer-repeat: 3000

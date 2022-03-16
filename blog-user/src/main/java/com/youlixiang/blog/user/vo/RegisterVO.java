@@ -1,6 +1,7 @@
 package com.youlixiang.blog.user.vo;
 
 import com.youlixiang.blog.common.validate.InsertGroup;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -50,4 +51,24 @@ public class RegisterVO {
      * 确认密码
      */
     private String confirmPassword;
+    /**
+     * qq
+     */
+    private String qq;
+    /**
+     * gitee
+     */
+    private String gitee;
+    /**
+     * github
+     */
+    private String github;
+    /**
+     * csdn
+     */
+    private String csdn;
+    /**
+     * slogan
+     */
+    private String slogan;
 }
