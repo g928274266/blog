@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
      * @return 通用返回
      */
     @ExceptionHandler(value = {CustomException.class})
-    public CommonResult registerExceptionHandler(CustomException e) {
+    public CommonResult customExceptionHandler(CustomException e) {
         return CommonResult.error(e.getCode(), e.getMessage());
     }
 }
