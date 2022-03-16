@@ -1,8 +1,8 @@
 package com.youlixiang.blog.user.util;
 
 import com.youlixiang.blog.common.constant.UserErrorEnum;
+import com.youlixiang.blog.common.exception.CustomException;
 import com.youlixiang.blog.common.util.JwtUtils;
-import com.youlixiang.blog.user.exception.CustomException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,5 +33,12 @@ public class CheckLoginUtils {
                     , UserErrorEnum.NOT_LOGIN.getMessage());
         }
         return username;
+    }
+
+    public static void isLogin(String token) throws CustomException {
+        if (!JwtUtils.checkToken(token)) {
+            throw new CustomException(UserErrorEnum.TOKEN_NOT_VALID.getCode(),
+                    UserErrorEnum.TOKEN_NOT_VALID.getMessage());
+        }
     }
 }

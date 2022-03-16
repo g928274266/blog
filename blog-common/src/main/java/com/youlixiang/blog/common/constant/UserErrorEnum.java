@@ -38,7 +38,11 @@ public enum UserErrorEnum {
     /**
      * 头像上传失败
      */
-    AVATAR_NOT_UPLOAD(20008, "头像上传失败");
+    AVATAR_NOT_UPLOAD(20008, "头像上传失败"),
+    /**
+     * Token无效
+     */
+    TOKEN_NOT_VALID(20009, "token无效");
 
     private final int code;
 

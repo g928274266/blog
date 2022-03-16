@@ -1,8 +1,8 @@
-package com.youlixiang.blog.user.handler;
+package com.youlixiang.blog.common.handler;
 
 import com.youlixiang.blog.common.constant.UserErrorEnum;
+import com.youlixiang.blog.common.exception.CustomException;
 import com.youlixiang.blog.common.util.CommonResult;
-import com.youlixiang.blog.user.exception.CustomException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

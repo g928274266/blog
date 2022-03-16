@@ -1,5 +1,6 @@
 package com.youlixiang.blog.oss.controller;
 
+import com.youlixiang.blog.common.exception.CustomException;
 import com.youlixiang.blog.common.util.CommonResult;
 import com.youlixiang.blog.oss.service.OssService;
 import io.swagger.annotations.Api;
@@ -33,10 +34,11 @@ public class OssController {
      *
      * @param multipartFile 上传文件
      * @return 通用返回
+     * @throws CustomException 异常
      */
     @PostMapping("/uploadOssFile")
     @ApiOperation(value = "上传文件")
-    public CommonResult uploadOssFile(MultipartFile multipartFile) {
+    public CommonResult uploadOssFile(MultipartFile multipartFile) throws CustomException {
         String url = ossService.uploadOssFile(multipartFile);
         return CommonResult.success().put("url", url);
     }

@@ -1,8 +1,8 @@
 package com.youlixiang.blog.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.youlixiang.blog.common.exception.CustomException;
 import com.youlixiang.blog.user.entity.BlogUser;
-import com.youlixiang.blog.user.exception.CustomException;
 import com.youlixiang.blog.user.vo.BlogUserVO;
 import com.youlixiang.blog.user.vo.LoginVO;
 import com.youlixiang.blog.user.vo.RegisterVO;

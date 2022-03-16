@@ -1,5 +1,6 @@
 package com.youlixiang.blog.oss.service;
 
+import com.youlixiang.blog.common.exception.CustomException;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -17,9 +18,10 @@ public interface OssService {
      * 上传文件
      *
      * @param multipartFile 上传文件
-     * @return 返回地址
+     * @return 文件url
+     * @throws CustomException 自定义异常
      */
-    String uploadOssFile(MultipartFile multipartFile);
+    String uploadOssFile(MultipartFile multipartFile) throws CustomException;
 
     /**
      * 删除文件

@@ -1,4 +1,4 @@
-package com.youlixiang.blog.user.exception;
+package com.youlixiang.blog.common.exception;
 
 /**
  * 自定义异常类
