@@ -107,5 +107,19 @@ public class BlogUserController {
         blogUserService.uploadInfo(username, userVO);
         return CommonResult.success("更新信息成功");
     }
+
+    /**
+     * 用户登出
+     *
+     * @param request 请求
+     * @return 通用返回
+     * @throws CustomException 异常
+     */
+    @ApiOperation(value = "用户登出")
+    @GetMapping("/logout")
+    public CommonResult logout(HttpServletRequest request) throws CustomException {
+        CheckLoginUtils.isLogin(request);
+        return CommonResult.success("用户登出成功");
+    }
 }
 

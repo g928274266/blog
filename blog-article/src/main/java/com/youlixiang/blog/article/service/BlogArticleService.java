@@ -2,6 +2,9 @@ package com.youlixiang.blog.article.service;
 
 import com.youlixiang.blog.article.entity.BlogArticle;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.youlixiang.blog.article.vo.BlogArticleVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface BlogArticleService extends IService<BlogArticle> {
 
+    List<BlogArticleVO> listArticle(Long current, Long limit, BlogArticleVO blogArticleVO);
 }

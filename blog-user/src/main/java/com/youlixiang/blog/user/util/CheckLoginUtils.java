@@ -34,11 +34,4 @@ public class CheckLoginUtils {
         }
         return username;
     }
-
-    public static void isLogin(String token) throws CustomException {
-        if (!JwtUtils.checkToken(token)) {
-            throw new CustomException(UserErrorEnum.TOKEN_NOT_VALID.getCode(),
-                    UserErrorEnum.TOKEN_NOT_VALID.getMessage());
-        }
-    }
 }

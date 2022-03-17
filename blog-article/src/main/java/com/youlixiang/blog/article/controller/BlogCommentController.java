@@ -31,6 +31,7 @@ public class BlogCommentController {
     @ApiOperation(value = "增加评论")
     @PostMapping("/addComment")
     public CommonResult addComment(@RequestBody BlogCommentVO blogCommentVO) {
+        
         return CommonResult.success();
     }
 }
