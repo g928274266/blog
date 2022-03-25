@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * <p>
@@ -120,6 +121,37 @@ public class BlogUserController {
     public CommonResult logout(HttpServletRequest request) throws CustomException {
         CheckLoginUtils.isLogin(request);
         return CommonResult.success("用户登出成功");
+    }
+
+    /**
+     * 获取用户列表
+     *
+     * @param current 当前页
+     * @param limit   页面大小
+     * @return 通用返回
+     */
+    @ApiOperation(value = "用户列表")
+    @GetMapping("/listUser/{current}/{limit}")
+    public CommonResult listUser(@PathVariable("current") Long current,
+                                 @PathVariable("limit") Long limit) {
+        Map<String, Object> userMap = blogUserService.listUser(current, limit);
+        return CommonResult.success().put("userMap", userMap);
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param request  请求
+     * @param username 用户名
+     * @return 通用返回
+     * @throws CustomException 异常
+     */
+    @ApiOperation(value = "删除用户")
+    @DeleteMapping("/removeUser/{username}")
+    public CommonResult removeUser(HttpServletRequest request, @PathVariable("username") String username) throws CustomException {
+        CheckLoginUtils.isLogin(request);
+        blogUserService.removeUser(username);
+        return CommonResult.success("删除用户成功");
     }
 }
 

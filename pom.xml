@@ -43,6 +43,7 @@
         <jwt.version>0.7.0</jwt.version>
         <aliyun-sdk-oss>3.10.2</aliyun-sdk-oss>
         <jodatime.version>2.10.1</jodatime.version>
+        <druid.version>1.2.8</druid.version>
     </properties>
 
     <dependencyManagement>
@@ -146,10 +147,18 @@
                 <version>${aliyun-sdk-oss}</version>
             </dependency>
 
+            <!-- joda -->
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${jodatime.version}</version>
+            </dependency>
+
+            <!-- druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
             </dependency>
 
         </dependencies>

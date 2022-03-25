@@ -1,6 +1,8 @@
 package com.youlixiang.blog.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.youlixiang.blog.common.constant.UserErrorEnum;
 import com.youlixiang.blog.common.exception.CustomException;
@@ -16,6 +18,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -122,6 +128,48 @@ public class BlogUserServiceImpl extends ServiceImpl<BlogUserMapper, BlogUser> i
         BeanUtils.copyProperties(userVO, blogUser);
 
         blogUserMapper.updateById(blogUser);
+    }
+
+    @Override
+    public Map<String, Object> listUser(Long current, Long limit) {
+        IPage<BlogUser> blogUserPage = new Page<>(current, limit);
+
+        IPage<BlogUser> selectPage = blogUserMapper.selectPage(blogUserPage, null);
+
+        Map<String, Object> userMap = new HashMap<>();
+
+        List<BlogUser> blogUsers = selectPage.getRecords();
+        long page = selectPage.getCurrent();
+        long size = selectPage.getSize();
+        long total = selectPage.getTotal();
+
+        List<BlogUserVO> blogUserVOList = blogUsers.stream().map(blogUser -> {
+            BlogUserVO blogUserVO = new BlogUserVO();
+            BeanUtils.copyProperties(blogUser, blogUserVO);
+            return blogUserVO;
+        }).collect(Collectors.toList());
+
+        userMap.put("blogUserVOList", blogUserVOList);
+        userMap.put("page", page);
+        userMap.put("size", size);
+        userMap.put("total", total);
+
+        return userMap;
+    }
+
+    @Override
+    public void removeUser(String username) throws CustomException {
+        QueryWrapper<BlogUser> blogUserQueryWrapper = new QueryWrapper<>();
+        blogUserQueryWrapper.eq("username", username);
+
+        int delete = blogUserMapper.delete(blogUserQueryWrapper);
+
+        if (delete == 1) {
+            return;
+        }
+
+        throw new CustomException(UserErrorEnum.USER_NOT_EXIST.getCode(),
+                UserErrorEnum.USER_NOT_EXIST.getMessage());
     }
 
     private BlogUser getBlogUserByUsername(String username) throws CustomException {

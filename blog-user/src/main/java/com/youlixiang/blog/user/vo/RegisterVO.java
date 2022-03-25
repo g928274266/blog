@@ -1,7 +1,6 @@
 package com.youlixiang.blog.user.vo;
 
 import com.youlixiang.blog.common.validate.InsertGroup;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -25,7 +24,7 @@ public class RegisterVO {
     /**
      * 性别
      */
-    @Size(max = 1, min = 1, groups = {InsertGroup.class})
+    @Size(max = 1, min = 1, message = "性别最多一个字符", groups = {InsertGroup.class})
     private String gender;
     /**
      * 手机号

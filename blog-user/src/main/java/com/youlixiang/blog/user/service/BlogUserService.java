@@ -7,6 +7,8 @@ import com.youlixiang.blog.user.vo.BlogUserVO;
 import com.youlixiang.blog.user.vo.LoginVO;
 import com.youlixiang.blog.user.vo.RegisterVO;
 
+import java.util.Map;
+
 /**
  * <p>
  * 服务类
@@ -58,4 +60,21 @@ public interface BlogUserService extends IService<BlogUser> {
      * @param userVO   用户信息
      */
     void uploadInfo(String username, BlogUserVO userVO);
+
+    /**
+     * 用户列表
+     *
+     * @param current 当前页
+     * @param limit   页面大小
+     * @return 用户列表
+     */
+    Map<String, Object> listUser(Long current, Long limit);
+
+    /**
+     * 删除用户
+     *
+     * @param username 用户名
+     * @throws CustomException 异常
+     */
+    void removeUser(String username) throws CustomException;
 }
