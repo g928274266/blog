@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlixiang.blog.mapper.BlogArticleMapper">
+
+    <select id="listArticle" resultMap="blogArticleVoMap">
+        SELECT a.`article_title`,
+        t.`type_name`,
+        a.`view_count`,
+        a.`gmt_created`,
+        a.`gmt_modified`
+        FROM blog_article AS a
+        LEFT OUTER JOIN blog_type AS t
+        ON a.`type_id` = t.`type_id`
+        <trim prefix="where" suffixOverrides="and">
+            <if test="blogArticleVO.type != null and blogArticleVO.type != '' ">
+                t.`type_name` = #{blogArticleVO.type} and
+            </if>
+            <if test="blogArticleVO.articleTitle != null and blogArticleVO.articleTitle != '' ">
+                a.`article_title` = #{blogArticleVO.articleTitle} and
+            </if>
+            <if test="blogArticleVO.createTime != null and blogArticleVO.createTime != '' ">
+                a.`gmt_created` >= #{blogArticleVO.createTime} and
+            </if>
+            <if test="blogArticleVO.deadline != null and blogArticleVO.deadline != '' ">
+                a.`gmt_created` <![CDATA[ < ]]> #{blogArticleVO.deadline}
+            </if>
+        </trim>
+    </select>
+
+    <resultMap id="blogArticleVoMap" type="com.youlixiang.blog.article.vo.BlogArticleVO">
+
+    </resultMap>
+</mapper>

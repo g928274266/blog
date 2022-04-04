@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: blog
+  datasource:
+    #配置druid数据库连接池的相关配置
+    druid:
+      enable: true
+      #开启druid监控页监控功能与防火墙功能
+      filters: stat,wall,slf4j
+      filter:
+        stat:
+          #配置慢sql的时间
+          slow-sql-millis: 1000
+          #在日志中打印慢sql
+          log-slow-sql: true
+          #开启功能
+          enabled: true
+        wall:
+          #开启防火墙功能
+          enabled: true
+      #配置druid监控页功能
+      stat-view-servlet:
+        #开启功能
+        enabled: true
+        #配置druid配置页用户名
+        login-username: root
+        #配置druid配置页密码
+        login-password: 123456
+        #重置功能是否生效 （默认为true）
+        reset-enable: false
+        #配置druid=监控页 web-jdbc的功能
+      web-stat-filter:
+        #开启功能
+        enabled: true
+        #配置拦截器不包括拦截的文件后缀
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+        #配置拦截器拦截的文件
+        url-pattern: /*
+        #配置springAOP要连接的包名
+      aop-patterns: com.youlixiang.springboot.config.*
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: com/youlixiang/blog/mapper/xml/*.xml
