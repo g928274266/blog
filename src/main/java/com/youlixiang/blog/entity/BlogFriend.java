@@ -10,25 +10,32 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 文章类型
+ * 友链
  * </p>
  *
  * @author 郭非
- * @since 2022-03-16
+ * @since 2022-04-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "BlogType对象", description = "")
-public class BlogType implements Serializable {
+@TableName("blog_friend")
+@ApiModel(value = "Friend对象", description = "")
+public class BlogFriend implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "类型编号")
-    @TableId(value = "type_id", type = IdType.AUTO)
-    private Integer typeId;
+    @ApiModelProperty(value = "友链编号")
+    @TableId(value = "friend_id", type = IdType.AUTO)
+    private Integer friendId;
 
-    @ApiModelProperty(value = "类型名称")
-    private String typeName;
+    @ApiModelProperty(value = "友链名称")
+    private String friendName;
+
+    @ApiModelProperty(value = "友链链接")
+    private String friendUrl;
+
+    @ApiModelProperty(value = "友链描述")
+    private String friendDescribe;
 
     @ApiModelProperty(value = "逻辑删除(0未删除 1已删除)")
     @TableLogic
@@ -41,5 +48,6 @@ public class BlogType implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String gmtModified;
+
 
 }

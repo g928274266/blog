@@ -2,6 +2,7 @@ package com.youlixiang.blog.controller;
 
 import com.youlixiang.blog.exception.CustomException;
 import com.youlixiang.blog.service.BlogTypeService;
+import com.youlixiang.blog.util.CheckLoginUtils;
 import com.youlixiang.blog.util.CommonResult;
 import com.youlixiang.blog.vo.BlogTypeVO;
 import io.swagger.annotations.Api;
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -30,15 +32,49 @@ public class BlogTypeController {
     /**
      * 增加文章分类
      *
+     * @param request    请求头
      * @param blogTypeVO 文章分类信息
      * @return 通用返回
      * @throws CustomException 异常
      */
     @ApiOperation(value = "增加文章分类")
     @PostMapping("/addBlogType")
-    public CommonResult addBlogType(@RequestBody BlogTypeVO blogTypeVO) throws CustomException {
+    public CommonResult addBlogType(HttpServletRequest request, @RequestBody BlogTypeVO blogTypeVO) throws CustomException {
+        CheckLoginUtils.isLogin(request);
         blogTypeService.addBlogType(blogTypeVO);
         return CommonResult.success("增加文章分类成功");
+    }
+
+    /**
+     * 删除文章分类
+     *
+     * @param request 请求头
+     * @param typeId  分类编号
+     * @return 通用返回
+     * @throws CustomException 异常
+     */
+    @ApiOperation(value = "删除文章分类")
+    @DeleteMapping("/removeBlogType/{typeId}")
+    public CommonResult removeBlogType(HttpServletRequest request, @PathVariable("typeId") Integer typeId) throws CustomException {
+        CheckLoginUtils.isLogin(request);
+        blogTypeService.removeBlogType(typeId);
+        return CommonResult.success("删除文章分类成功");
+    }
+
+    /**
+     * 修改分类信息
+     *
+     * @param request    请求头
+     * @param blogTypeVO 分类信息
+     * @return 通用返回
+     * @throws CustomException 异常
+     */
+    @ApiOperation(value = "修改分类信息")
+    @PutMapping("/updateBlogType")
+    public CommonResult updateBlogType(HttpServletRequest request, @RequestBody BlogTypeVO blogTypeVO) throws CustomException {
+        CheckLoginUtils.isLogin(request);
+        blogTypeService.updateBlogType(blogTypeVO);
+        return CommonResult.success("修改分类信息成功");
     }
 
     /**
@@ -52,5 +88,6 @@ public class BlogTypeController {
         List<BlogTypeVO> blogTypeVOList = blogTypeService.listBlogType();
         return CommonResult.success().put("blogTypeVOList", blogTypeVOList);
     }
+
 }
 

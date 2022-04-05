@@ -1,5 +1,6 @@
 package com.youlixiang.blog;
 
+import com.youlixiang.blog.properties.EmailProperties;
 import com.youlixiang.blog.properties.OssProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 @MapperScan(basePackages = {"com.youlixiang.blog.mapper"})
-@EnableConfigurationProperties(OssProperties.class)
+@EnableConfigurationProperties({OssProperties.class, EmailProperties.class })
 public class BlogApplication {
     public static void main(String[] args) {
         SpringApplication.run(BlogApplication.class, args);

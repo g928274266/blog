@@ -10,7 +10,19 @@ public enum ArticleErrorEnum {
     /**
      * 增加文章分类失败
      */
-    ADD_ARTICLE_TYPE_ERROR(20010, "增加文章分类失败");
+    ADD_ARTICLE_TYPE_ERROR(20010, "增加文章分类失败"),
+    /**
+     * 修改文章分类失败
+     */
+    UPDATE_ARTICLE_TYPE_ERROR(20011, "修改文章分类失败"),
+    /**
+     * 删除文章分类失败
+     */
+    REMOVE_ARTICLE_TYPE_ERROR(20012, "删除文章分类失败"),
+    /**
+     * 文章分类下还存在文章
+     */
+    EXIST_ARTICLE_ERROR(20013, "文章分类下还存在文章");
 
 
     private final int code;

@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 文章评论
  * </p>
  *
  * @author 郭非

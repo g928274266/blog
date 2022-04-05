@@ -1,0 +1,21 @@
+package com.youlixiang.blog.controller;
+
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author 郭非
+ * @since 2022-04-05
+ */
+@RestController
+@RequestMapping("/blog/friend")
+public class FriendController {
+
+}
+

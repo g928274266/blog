@@ -1,6 +1,15 @@
 spring:
   application:
     name: blog
+  mail:
+    password: tkdfaphqkqgebbgb
+    username: guo928274266@qq.com
+    host: smtp.qq.com
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
   datasource:
     #配置druid数据库连接池的相关配置
     druid:
@@ -38,7 +47,13 @@ spring:
         url-pattern: /*
         #配置springAOP要连接的包名
       aop-patterns: com.youlixiang.springboot.config.*
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: com/youlixiang/blog/mapper/xml/*.xml
+email:
+  receiveAddress: 928274266@qq.com

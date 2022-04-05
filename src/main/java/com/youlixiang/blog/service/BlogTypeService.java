@@ -31,4 +31,20 @@ public interface BlogTypeService extends IService<BlogType> {
      * @return 文章分类列表
      */
     List<BlogTypeVO> listBlogType();
+
+    /**
+     * 修改文章分类
+     *
+     * @param blogTypeVO 分类信息
+     * @throws CustomException 异常
+     */
+    void updateBlogType(BlogTypeVO blogTypeVO) throws CustomException;
+
+    /**
+     * 删除文章分类
+     *
+     * @param typeId 分类编号
+     * @throws CustomException 异常
+     */
+    void removeBlogType(Integer typeId) throws CustomException;
 }
