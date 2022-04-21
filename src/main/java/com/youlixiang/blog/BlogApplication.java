@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 @MapperScan(basePackages = {"com.youlixiang.blog.mapper"})
-@EnableConfigurationProperties({OssProperties.class, EmailProperties.class })
+@EnableConfigurationProperties({OssProperties.class, EmailProperties.class})
 public class BlogApplication {
     public static void main(String[] args) {
         SpringApplication.run(BlogApplication.class, args);
