@@ -47,6 +47,38 @@ public class FriendController {
     }
 
     /**
+     * 删除友链
+     *
+     * @param request  请求头
+     * @param friendId 友链编号
+     * @return 通用返回
+     * @throws CustomException 异常
+     */
+    @ApiOperation(value = "删除友链")
+    @DeleteMapping("/removeFriend/{friendId}")
+    public CommonResult removeFriend(HttpServletRequest request,@PathVariable(value = "friendId") Integer friendId) throws CustomException {
+        CheckLoginUtils.isLogin(request);
+        friendService.removeFriend(friendId);
+        return CommonResult.success("删除友链成功");
+    }
+
+    /**
+     * 修改友链
+     *
+     * @param request      请求头
+     * @param blogFriendVO 友链信息
+     * @return 通用返回
+     * @throws CustomException 异常
+     */
+    @ApiOperation(value = "修改友链")
+    @PutMapping("/updateFriend")
+    public CommonResult updateFriend(HttpServletRequest request, BlogFriendVO blogFriendVO) throws CustomException {
+        CheckLoginUtils.isLogin(request);
+        friendService.updateFriend(blogFriendVO);
+        return CommonResult.success("修改友链成功");
+    }
+
+    /**
      * 查询友链列表
      *
      * @param current 当前页

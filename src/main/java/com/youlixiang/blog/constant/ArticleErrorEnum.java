@@ -1,6 +1,8 @@
 package com.youlixiang.blog.constant;
 
 /**
+ * 文章错误枚举类
+ *
  * @Author 郭非
  * @Date 2022/3/17
  * @Time 22:43

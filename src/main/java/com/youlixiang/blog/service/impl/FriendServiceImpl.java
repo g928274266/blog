@@ -72,4 +72,28 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, BlogFriend> imp
 
         return friendMap;
     }
+
+    @Override
+    public void removeFriend(Integer friendId) throws CustomException {
+        int delete = friendMapper.deleteById(friendId);
+
+        if (delete <= 0) {
+            throw new CustomException(FriendErrorEnum.REMOVE_FRIEND_ERROR.getCode(),
+                    FriendErrorEnum.REMOVE_FRIEND_ERROR.getMessage());
+        }
+    }
+
+    @Override
+    public void updateFriend(BlogFriendVO blogFriendVO) throws CustomException {
+        BlogFriend blogFriend = new BlogFriend();
+
+        BeanUtils.copyProperties(blogFriendVO, blogFriend);
+
+        int update = friendMapper.updateById(blogFriend);
+
+        if (update <= 0) {
+            throw new CustomException(FriendErrorEnum.UPDATE_FRIEND_ERROR.getCode(),
+                    FriendErrorEnum.UPDATE_FRIEND_ERROR.getMessage());
+        }
+    }
 }

@@ -32,4 +32,20 @@ public interface FriendService extends IService<BlogFriend> {
      * @return 友链集合
      */
     Map<String, Object> listFriend(Long current, Long limit);
+
+    /**
+     * 删除友链
+     *
+     * @param friendId 友链编号
+     * @throws CustomException 异常
+     */
+    void removeFriend(Integer friendId) throws CustomException;
+
+    /**
+     * 更新友链
+     *
+     * @param blogFriendVO 友链信息
+     * @throws CustomException 异常
+     */
+    void updateFriend(BlogFriendVO blogFriendVO) throws CustomException;
 }

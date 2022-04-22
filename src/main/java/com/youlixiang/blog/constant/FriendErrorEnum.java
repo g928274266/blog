@@ -12,7 +12,15 @@ public enum FriendErrorEnum {
     /**
      * 添加友链失败
      */
-    ADD_FRIEND_ERROR(20014, "添加友链失败");
+    ADD_FRIEND_ERROR(20014, "添加友链失败"),
+    /**
+     * 删除友链失败
+     */
+    REMOVE_FRIEND_ERROR(20015, "删除友链失败"),
+    /**
+     * 更新友链失败
+     */
+    UPDATE_FRIEND_ERROR(20016, "更新友链失败");
 
     /**
      * 返回状态码
