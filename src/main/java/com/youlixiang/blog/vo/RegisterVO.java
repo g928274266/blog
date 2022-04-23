@@ -27,6 +27,11 @@ public class RegisterVO {
     @Size(max = 1, min = 1, message = "性别最多一个字符", groups = {InsertGroup.class})
     private String gender;
     /**
+     * 生日
+     */
+    @Pattern(regexp = "^[1-9]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$")
+    private String birth;
+    /**
      * 手机号
      */
     @Pattern(

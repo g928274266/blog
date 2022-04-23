@@ -16,6 +16,10 @@ import javax.validation.constraints.Max;
 @Data
 public class BlogArticleVO {
     /**
+     * 文章编号
+     */
+    private Integer articleId;
+    /**
      * 类型
      */
     @Max(value = 30)
@@ -44,4 +48,8 @@ public class BlogArticleVO {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private String deadline;
+    /**
+     * 更新时间
+     */
+    private String modifiedTime;
 }

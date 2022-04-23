@@ -38,14 +38,17 @@ public class BlogUserController {
     /**
      * 用户注册
      *
+     * @param request    请求头
      * @param registerVO 注册信息
      * @return 通用返回
      * @throws CustomException 异常
      */
     @ApiOperation(value = "用户注册")
     @PostMapping("/register")
-    public CommonResult register(@Validated(value = {InsertGroup.class})
+    public CommonResult register(HttpServletRequest request,
+                                 @Validated(value = {InsertGroup.class})
                                  @RequestBody RegisterVO registerVO) throws CustomException {
+        CheckLoginUtils.isLogin(request);
         blogUserService.register(registerVO);
         return CommonResult.success("注册成功");
     }

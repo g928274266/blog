@@ -24,7 +24,7 @@ public class BlogArticleContent implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "文章编号")
-    @TableId(value = "article_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "article_id", type = IdType.INPUT)
     private Integer articleId;
 
     @ApiModelProperty(value = "文章内容")

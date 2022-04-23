@@ -56,7 +56,7 @@ public class FriendController {
      */
     @ApiOperation(value = "删除友链")
     @DeleteMapping("/removeFriend/{friendId}")
-    public CommonResult removeFriend(HttpServletRequest request,@PathVariable(value = "friendId") Integer friendId) throws CustomException {
+    public CommonResult removeFriend(HttpServletRequest request, @PathVariable(value = "friendId") Integer friendId) throws CustomException {
         CheckLoginUtils.isLogin(request);
         friendService.removeFriend(friendId);
         return CommonResult.success("删除友链成功");
@@ -72,7 +72,7 @@ public class FriendController {
      */
     @ApiOperation(value = "修改友链")
     @PutMapping("/updateFriend")
-    public CommonResult updateFriend(HttpServletRequest request, BlogFriendVO blogFriendVO) throws CustomException {
+    public CommonResult updateFriend(HttpServletRequest request, @RequestBody BlogFriendVO blogFriendVO) throws CustomException {
         CheckLoginUtils.isLogin(request);
         friendService.updateFriend(blogFriendVO);
         return CommonResult.success("修改友链成功");

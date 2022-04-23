@@ -55,5 +55,6 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: com/youlixiang/blog/mapper/xml/*.xml
+  type-aliases-package: com.youlixiang.blog.entity
 email:
   receiveAddress: 928274266@qq.com

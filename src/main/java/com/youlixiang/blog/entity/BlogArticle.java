@@ -39,6 +39,9 @@ public class BlogArticle implements Serializable {
     @ApiModelProperty(value = "浏览数量")
     private Long viewCount;
 
+    @ApiModelProperty(value = "文章封面")
+    private String articleImg;
+
     @ApiModelProperty(value = "逻辑删除(0未删除 1已删除)")
     @TableLogic
     private Integer logicDeleted;

@@ -1,14 +1,26 @@
 package com.youlixiang.blog.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.youlixiang.blog.constant.ArticleErrorEnum;
 import com.youlixiang.blog.entity.BlogArticle;
+import com.youlixiang.blog.entity.BlogArticleContent;
+import com.youlixiang.blog.entity.BlogType;
+import com.youlixiang.blog.exception.CustomException;
+import com.youlixiang.blog.mapper.BlogArticleContentMapper;
 import com.youlixiang.blog.mapper.BlogArticleMapper;
+import com.youlixiang.blog.mapper.BlogTypeMapper;
 import com.youlixiang.blog.service.BlogArticleService;
+import com.youlixiang.blog.vo.BlogArticlePublishVO;
 import com.youlixiang.blog.vo.BlogArticleVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -22,9 +34,57 @@ import java.util.List;
 public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogArticle> implements BlogArticleService {
     @Resource
     private BlogArticleMapper blogArticleMapper;
+    @Resource
+    private BlogArticleContentMapper blogArticleContentMapper;
+    @Resource
+    private BlogTypeMapper blogTypeMapper;
 
     @Override
-    public List<BlogArticleVO> listArticle(Long current, Long limit, BlogArticleVO blogArticleVO) {
-        return blogArticleMapper.listArticle(current, limit, blogArticleVO);
+    public Map<String, Object> listArticle(Long current, Long limit, BlogArticleVO blogArticleVO) {
+        List<BlogArticle> articleList = blogArticleMapper.listArticle(current, limit, blogArticleVO);
+
+        List<BlogArticleVO> blogArticleVOList = articleList.stream().map((article) -> {
+            BlogArticleVO vo = new BlogArticleVO();
+            BeanUtils.copyProperties(article, vo);
+            vo.setCreateTime(article.getGmtCreated());
+            vo.setModifiedTime(article.getGmtModified());
+            BlogType blogType = blogTypeMapper.selectById(article.getTypeId());
+            vo.setType(blogType.getTypeName());
+            return vo;
+        }).collect(Collectors.toList());
+
+        Map<String, Object> articleMap = new HashMap<>();
+
+        articleMap.put("blogArticleVOList", blogArticleVOList);
+        articleMap.put("page", current);
+        articleMap.put("size", limit);
+        articleMap.put("total", blogArticleVOList.size());
+
+        return articleMap;
+    }
+
+    @Transactional(rollbackFor = CustomException.class)
+    @Override
+    public void publishArticle(BlogArticlePublishVO publishVO) throws CustomException {
+        BlogArticle blogArticle = new BlogArticle();
+        BeanUtils.copyProperties(publishVO, blogArticle);
+
+        int insert = blogArticleMapper.insert(blogArticle);
+
+        if (insert <= 0) {
+            throw new CustomException(ArticleErrorEnum.PUBLISH_ARTICLE_ERROR.getCode(),
+                    ArticleErrorEnum.PUBLISH_ARTICLE_ERROR.getMessage());
+        }
+
+        BlogArticleContent blogArticleContent = new BlogArticleContent();
+        blogArticleContent.setContent(publishVO.getContent());
+        blogArticleContent.setArticleId(blogArticle.getArticleId());
+
+        int contentInsert = blogArticleContentMapper.insert(blogArticleContent);
+
+        if (contentInsert <= 0) {
+            throw new CustomException(ArticleErrorEnum.PUBLISH_ARTICLE_ERROR.getCode(),
+                    ArticleErrorEnum.PUBLISH_ARTICLE_ERROR.getMessage());
+        }
     }
 }

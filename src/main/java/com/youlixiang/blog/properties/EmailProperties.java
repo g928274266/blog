@@ -14,5 +14,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(value = "email")
 public class EmailProperties {
+    /**
+     * 接受地址
+     */
     private String receiveAddress;
 }

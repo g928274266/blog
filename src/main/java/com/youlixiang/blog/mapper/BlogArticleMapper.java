@@ -24,6 +24,6 @@ public interface BlogArticleMapper extends BaseMapper<BlogArticle> {
      * @param blogArticleVO 条件信息
      * @return 文章列表
      */
-    List<BlogArticleVO> listArticle(@Param("current") Long current, @Param("limit") Long limit,
+    List<BlogArticle> listArticle(@Param("current") Long current, @Param("limit") Long limit,
                                     @Param("blogArticleVO") BlogArticleVO blogArticleVO);
 }

@@ -24,7 +24,11 @@ public enum ArticleErrorEnum {
     /**
      * 文章分类下还存在文章
      */
-    EXIST_ARTICLE_ERROR(20013, "文章分类下还存在文章");
+    EXIST_ARTICLE_ERROR(20013, "文章分类下还存在文章"),
+    /**
+     * 发布文章失败
+     */
+    PUBLISH_ARTICLE_ERROR(20017, "发布文章失败");
 
 
     private final int code;

@@ -28,4 +28,8 @@ public class BlogFriendVO {
      * 友链描述
      */
     private String friendDescribe;
+    /**
+     * 友链邮箱
+     */
+    private String friendEmail;
 }

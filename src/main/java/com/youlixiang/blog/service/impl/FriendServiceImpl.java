@@ -7,9 +7,13 @@ import com.youlixiang.blog.constant.FriendErrorEnum;
 import com.youlixiang.blog.entity.BlogFriend;
 import com.youlixiang.blog.exception.CustomException;
 import com.youlixiang.blog.mapper.FriendMapper;
+import com.youlixiang.blog.properties.EmailProperties;
 import com.youlixiang.blog.service.FriendService;
 import com.youlixiang.blog.vo.BlogFriendVO;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,6 +34,10 @@ import java.util.stream.Collectors;
 public class FriendServiceImpl extends ServiceImpl<FriendMapper, BlogFriend> implements FriendService {
     @Resource
     private FriendMapper friendMapper;
+    @Autowired
+    private JavaMailSender javaMailSender;
+    @Autowired
+    private EmailProperties emailProperties;
 
     @Override
     public void addFriend(BlogFriendVO blogFriendVO) throws CustomException {
@@ -43,6 +51,18 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, BlogFriend> imp
             throw new CustomException(FriendErrorEnum.ADD_FRIEND_ERROR.getCode()
                     , FriendErrorEnum.ADD_FRIEND_ERROR.getMessage());
         }
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        //设置发送者
+        message.setFrom(emailProperties.getReceiveAddress());
+        //设置接受者
+        message.setTo(blogFriendVO.getFriendEmail());
+        //设置标题
+        message.setSubject("友链添加成功");
+        //设置内容
+        message.setText("友链已经添加成功啦 快来我的博客看看吧");
+        //发送邮件
+        javaMailSender.send(message);
     }
 
     @Override
