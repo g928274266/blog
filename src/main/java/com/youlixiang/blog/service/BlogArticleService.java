@@ -35,4 +35,20 @@ public interface BlogArticleService extends IService<BlogArticle> {
      * @throws CustomException 异常
      */
     void publishArticle(BlogArticlePublishVO publishVO) throws CustomException;
+
+    /**
+     * 删除文章
+     *
+     * @param articleId 文章编号
+     * @throws CustomException 异常
+     */
+    void removeArticle(Integer articleId) throws CustomException;
+
+    /**
+     * 修改文章
+     *
+     * @param publishVO 文章内容
+     * @throws CustomException 异常
+     */
+    void updateArticle(BlogArticlePublishVO publishVO) throws CustomException;
 }

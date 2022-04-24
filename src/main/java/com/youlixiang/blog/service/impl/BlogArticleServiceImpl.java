@@ -49,7 +49,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
             vo.setCreateTime(article.getGmtCreated());
             vo.setModifiedTime(article.getGmtModified());
             BlogType blogType = blogTypeMapper.selectById(article.getTypeId());
-            vo.setType(blogType.getTypeName());
+            vo.setArticleType(blogType.getTypeName());
             return vo;
         }).collect(Collectors.toList());
 
@@ -79,12 +79,55 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         BlogArticleContent blogArticleContent = new BlogArticleContent();
         blogArticleContent.setContent(publishVO.getContent());
         blogArticleContent.setArticleId(blogArticle.getArticleId());
+        System.out.println(blogArticle.getArticleId());
 
         int contentInsert = blogArticleContentMapper.insert(blogArticleContent);
 
         if (contentInsert <= 0) {
             throw new CustomException(ArticleErrorEnum.PUBLISH_ARTICLE_ERROR.getCode(),
                     ArticleErrorEnum.PUBLISH_ARTICLE_ERROR.getMessage());
+        }
+    }
+
+    @Transactional(rollbackFor = CustomException.class)
+    @Override
+    public void removeArticle(Integer articleId) throws CustomException {
+        int delete = blogArticleMapper.deleteById(articleId);
+
+        if (delete <= 0) {
+            throw new CustomException(ArticleErrorEnum.REMOVE_ARTICLE_ERROR.getCode(),
+                    ArticleErrorEnum.REMOVE_ARTICLE_ERROR.getMessage());
+        }
+
+        int deleteContent = blogArticleContentMapper.deleteById(articleId);
+
+        if (deleteContent <= 0) {
+            throw new CustomException(ArticleErrorEnum.REMOVE_ARTICLE_CONTENT_ERROR.getCode(),
+                    ArticleErrorEnum.REMOVE_ARTICLE_CONTENT_ERROR.getMessage());
+        }
+    }
+
+    @Transactional(rollbackFor = CustomException.class)
+    @Override
+    public void updateArticle(BlogArticlePublishVO publishVO) throws CustomException {
+        BlogArticle blogArticle = new BlogArticle();
+        BeanUtils.copyProperties(publishVO, blogArticle);
+
+        int update = blogArticleMapper.updateById(blogArticle);
+
+        if (update <= 0) {
+            throw new CustomException(ArticleErrorEnum.UPDATE_ARTICLE_ERROR.getCode(),
+                    ArticleErrorEnum.UPDATE_ARTICLE_ERROR.getMessage());
+        }
+
+        BlogArticleContent blogArticleContent = new BlogArticleContent();
+        BeanUtils.copyProperties(publishVO, blogArticleContent);
+
+        int updateContent = blogArticleContentMapper.updateById(blogArticleContent);
+
+        if (updateContent <= 0) {
+            throw new CustomException(ArticleErrorEnum.UPDATE_ARTICLE_CONTENT_ERROR.getCode(),
+                    ArticleErrorEnum.UPDATE_ARTICLE_CONTENT_ERROR.getMessage());
         }
     }
 }

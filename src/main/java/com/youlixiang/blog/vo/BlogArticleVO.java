@@ -23,7 +23,7 @@ public class BlogArticleVO {
      * 类型
      */
     @Max(value = 30)
-    private String type;
+    private String articleType;
     /**
      * 文章标题
      */
@@ -38,6 +38,10 @@ public class BlogArticleVO {
      * 浏览数量
      */
     private Long viewCount;
+    /**
+     * 文章封面
+     */
+    private String articleImg;
     /**
      * 创建时间
      */

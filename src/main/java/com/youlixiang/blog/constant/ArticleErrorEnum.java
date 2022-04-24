@@ -28,7 +28,17 @@ public enum ArticleErrorEnum {
     /**
      * 发布文章失败
      */
-    PUBLISH_ARTICLE_ERROR(20017, "发布文章失败");
+    PUBLISH_ARTICLE_ERROR(20017, "发布文章失败"),
+    /**
+     * 删除文章失败
+     */
+    REMOVE_ARTICLE_ERROR(20018, "删除文章失败"),
+    /**
+     * 删除文章内容失败
+     */
+    REMOVE_ARTICLE_CONTENT_ERROR(20019, "删除文章内容失败"),
+    UPDATE_ARTICLE_ERROR(20018, "更新文章失败"),
+    UPDATE_ARTICLE_CONTENT_ERROR(20018, "更新文章内容");
 
 
     private final int code;

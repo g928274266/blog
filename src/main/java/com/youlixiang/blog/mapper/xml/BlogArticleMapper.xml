@@ -3,27 +3,32 @@
 <mapper namespace="com.youlixiang.blog.mapper.BlogArticleMapper">
 
     <select id="listArticle" resultType="blogArticle">
-        SELECT a.`article_title`,
+        SELECT
+        a.`article_id`,
+        a.`article_title`,
         t.`type_name`,
         a.`view_count`,
         a.`gmt_created`,
         a.`gmt_modified`,
+        a.`article_img`,
+        a.`type_id`
         FROM blog_article AS a
         LEFT OUTER JOIN blog_type AS t
         ON a.`type_id` = t.`type_id`
         <trim prefix="where" suffixOverrides="and">
-            <if test="blogArticleVO.type != null and blogArticleVO.type != '' ">
-                t.`type_name` = #{blogArticleVO.type} and
+            <if test="blogArticleVO.articleType != null and blogArticleVO.articleType != '' ">
+                t.`type_name` = #{blogArticleVO.articleType} and
             </if>
             <if test="blogArticleVO.articleTitle != null and blogArticleVO.articleTitle != '' ">
-                a.`article_title` = #{blogArticleVO.articleTitle} and
+                a.`article_title` like '%${blogArticleVO.articleTitle}%' and
             </if>
             <if test="blogArticleVO.createTime != null and blogArticleVO.createTime != '' ">
                 a.`gmt_created` >= #{blogArticleVO.createTime} and
             </if>
             <if test="blogArticleVO.deadline != null and blogArticleVO.deadline != '' ">
-                a.`gmt_created` <![CDATA[ < ]]> #{blogArticleVO.deadline}
+                a.`gmt_created` <![CDATA[ < ]]> #{blogArticleVO.deadline} and
             </if>
+            a.`logic_deleted` = 0
         </trim>
         limit #{current},#{limit}
     </select>
