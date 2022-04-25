@@ -1,0 +1,17 @@
+server:
+  port: 88
+spring:
+  application:
+    name: blog-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: blog_route
+          uri: lb://blog-site
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*),/$\{segment}
+    nacos:
+      discovery:
+        server-addr: 49.233.53.179:8848

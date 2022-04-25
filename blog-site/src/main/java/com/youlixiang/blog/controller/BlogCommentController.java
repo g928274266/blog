@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "文章评论模块")
 @RestController
 @RequestMapping("/article/blog-comment")
-@CrossOrigin
 public class BlogCommentController {
     @Autowired
     private BlogCommentService blogCommentService;

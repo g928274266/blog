@@ -24,7 +24,6 @@ import java.util.List;
 @Api(tags = "分类模块")
 @RestController
 @RequestMapping("/article/blog-type")
-@CrossOrigin
 public class BlogTypeController {
     @Autowired
     private BlogTypeService blogTypeService;

@@ -25,7 +25,6 @@ import java.util.Map;
 @Api(tags = "文章模块")
 @RestController
 @RequestMapping("/article/blog-article")
-@CrossOrigin
 public class BlogArticleController {
     @Autowired
     private BlogArticleService blogArticleService;

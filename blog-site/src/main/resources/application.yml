@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: blog-site
+  mail:
+    host: smtp.qq.com

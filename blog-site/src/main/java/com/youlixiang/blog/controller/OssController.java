@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/oss/fileOss")
 @Api(tags = "oss模块")
-@CrossOrigin
 public class OssController {
     @Autowired
     private OssService ossService;

@@ -25,7 +25,6 @@ import java.util.Map;
 @Api(tags = "友链模块")
 @RestController
 @RequestMapping("/blog/friend")
-@CrossOrigin
 public class FriendController {
     @Autowired
     private FriendService friendService;
