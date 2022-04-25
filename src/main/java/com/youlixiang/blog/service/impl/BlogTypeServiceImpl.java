@@ -91,4 +91,10 @@ public class BlogTypeServiceImpl extends ServiceImpl<BlogTypeMapper, BlogType> i
                     , ArticleErrorEnum.REMOVE_ARTICLE_TYPE_ERROR.getMessage());
         }
     }
+
+    @Override
+    public String getBlogType(Integer articleId) {
+        BlogType blogType = blogTypeMapper.selectById(articleId);
+        return blogType.getTypeName();
+    }
 }

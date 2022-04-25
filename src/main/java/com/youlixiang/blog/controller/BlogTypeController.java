@@ -78,15 +78,28 @@ public class BlogTypeController {
     }
 
     /**
-     * 查询文章分类
+     * 查询文章分类列表
      *
      * @return 通用返回
      */
-    @ApiOperation(value = "查询文章分类")
+    @ApiOperation(value = "查询文章分类列表")
     @GetMapping("/listBlogType")
     public CommonResult listBlogType() {
         List<BlogTypeVO> blogTypeVOList = blogTypeService.listBlogType();
         return CommonResult.success().put("blogTypeVOList", blogTypeVOList);
+    }
+
+    /**
+     * 获取文章分类
+     *
+     * @param articleId 文章编号
+     * @return 文章分类
+     */
+    @ApiOperation(value = "获取文章分类")
+    @GetMapping("/getBlogType/{articleId}")
+    public CommonResult getBlogType(@PathVariable("articleId") Integer articleId) {
+        String blogType = blogTypeService.getBlogType(articleId);
+        return CommonResult.success().put("blogType", blogType);
     }
 
 }

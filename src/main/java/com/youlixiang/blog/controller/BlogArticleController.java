@@ -1,11 +1,9 @@
 package com.youlixiang.blog.controller;
 
 import com.youlixiang.blog.exception.CustomException;
-import com.youlixiang.blog.service.BlogArticleContentService;
 import com.youlixiang.blog.service.BlogArticleService;
 import com.youlixiang.blog.util.CheckLoginUtils;
 import com.youlixiang.blog.util.CommonResult;
-import com.youlixiang.blog.vo.BlogArticleContentVO;
 import com.youlixiang.blog.vo.BlogArticlePublishVO;
 import com.youlixiang.blog.vo.BlogArticleVO;
 import io.swagger.annotations.Api;
@@ -31,8 +29,6 @@ import java.util.Map;
 public class BlogArticleController {
     @Autowired
     private BlogArticleService blogArticleService;
-    @Autowired
-    private BlogArticleContentService blogArticleContentService;
 
     /**
      * 发布文章
@@ -100,19 +96,6 @@ public class BlogArticleController {
                                     @RequestBody BlogArticleVO blogArticleVO) {
         Map<String, Object> articleMap = blogArticleService.listArticle(current, limit, blogArticleVO);
         return CommonResult.success().put("articleMap", articleMap);
-    }
-
-    /**
-     * 获取文章内容
-     *
-     * @param articleId 文章编号
-     * @return 通用返回
-     */
-    @ApiOperation(value = "获取文章内容")
-    @GetMapping("/getArticleContent/{articleId}")
-    public CommonResult getArticleContent(@PathVariable("articleId") Integer articleId) {
-        BlogArticleContentVO contentVO = blogArticleContentService.getArticleContent(articleId);
-        return CommonResult.success().put("contentVO", contentVO);
     }
 }
 

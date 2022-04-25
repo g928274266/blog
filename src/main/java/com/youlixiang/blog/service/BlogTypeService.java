@@ -47,4 +47,12 @@ public interface BlogTypeService extends IService<BlogType> {
      * @throws CustomException 异常
      */
     void removeBlogType(Integer typeId) throws CustomException;
+
+    /**
+     * 获取文章分类
+     *
+     * @param articleId 文章编号
+     * @return 文章分类
+     */
+    String getBlogType(Integer articleId);
 }

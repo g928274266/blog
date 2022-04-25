@@ -43,22 +43,26 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
     public Map<String, Object> listArticle(Long current, Long limit, BlogArticleVO blogArticleVO) {
         List<BlogArticle> articleList = blogArticleMapper.listArticle(current, limit, blogArticleVO);
 
-        List<BlogArticleVO> blogArticleVOList = articleList.stream().map((article) -> {
-            BlogArticleVO vo = new BlogArticleVO();
-            BeanUtils.copyProperties(article, vo);
-            vo.setCreateTime(article.getGmtCreated());
-            vo.setModifiedTime(article.getGmtModified());
-            BlogType blogType = blogTypeMapper.selectById(article.getTypeId());
-            vo.setArticleType(blogType.getTypeName());
-            return vo;
-        }).collect(Collectors.toList());
-
         Map<String, Object> articleMap = new HashMap<>();
 
-        articleMap.put("blogArticleVOList", blogArticleVOList);
         articleMap.put("page", current);
         articleMap.put("size", limit);
-        articleMap.put("total", blogArticleVOList.size());
+        List<BlogArticleVO> blogArticleVOList = null;
+
+        if (articleList.size() > 0) {
+            blogArticleVOList = articleList.stream().map((article) -> {
+                BlogArticleVO vo = new BlogArticleVO();
+                BeanUtils.copyProperties(article, vo);
+                vo.setCreateTime(article.getGmtCreated());
+                vo.setModifiedTime(article.getGmtModified());
+                BlogType blogType = blogTypeMapper.selectById(article.getTypeId());
+                vo.setArticleType(blogType.getTypeName());
+                return vo;
+            }).collect(Collectors.toList());
+        }
+
+        articleMap.put("blogArticleVOList", blogArticleVOList);
+        articleMap.put("total", articleList.size());
 
         return articleMap;
     }

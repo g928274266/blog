@@ -37,8 +37,18 @@ public enum ArticleErrorEnum {
      * 删除文章内容失败
      */
     REMOVE_ARTICLE_CONTENT_ERROR(20019, "删除文章内容失败"),
-    UPDATE_ARTICLE_ERROR(20018, "更新文章失败"),
-    UPDATE_ARTICLE_CONTENT_ERROR(20018, "更新文章内容");
+    /**
+     * 更新文章失败
+     */
+    UPDATE_ARTICLE_ERROR(20020, "更新文章失败"),
+    /**
+     * 更新文章内容
+     */
+    UPDATE_ARTICLE_CONTENT_ERROR(20021, "更新文章内容失败"),
+    /**
+     * 查询文章内容失败
+     */
+    SELECT_CONTENT_ERROR(20022, "查询文章内容失败");
 
 
     private final int code;

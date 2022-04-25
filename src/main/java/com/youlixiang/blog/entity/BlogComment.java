@@ -31,7 +31,7 @@ public class BlogComment implements Serializable {
     private Integer articleId;
 
     @ApiModelProperty(value = "评论内容")
-    private String context;
+    private String comment;
 
     @ApiModelProperty(value = "用户编号")
     private String username;

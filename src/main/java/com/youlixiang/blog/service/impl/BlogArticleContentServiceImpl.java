@@ -31,19 +31,22 @@ public class BlogArticleContentServiceImpl extends ServiceImpl<BlogArticleConten
     public BlogArticleContentVO getArticleContent(Integer articleId) {
         BlogArticle blogArticle = blogArticleMapper.selectById(articleId);
 
-        Long viewCount = blogArticle.getViewCount();
-        viewCount += 1;
-        blogArticle.setViewCount(viewCount);
-
-        blogArticleMapper.updateById(blogArticle);
-
-        BlogArticleContent articleContent = blogArticleContentMapper.selectById(articleId);
-
         BlogArticleContentVO contentVO = new BlogArticleContentVO();
 
-        BeanUtils.copyProperties(blogArticle, contentVO);
-        contentVO.setContent(articleContent.getContent());
-        contentVO.setModifiedTime(articleContent.getGmtModified());
+        if (blogArticle != null) {
+            Long viewCount = blogArticle.getViewCount();
+            viewCount += 1;
+            blogArticle.setViewCount(viewCount);
+            blogArticleMapper.updateById(blogArticle);
+
+            BlogArticleContent articleContent = blogArticleContentMapper.selectById(articleId);
+
+            if (articleContent != null) {
+                BeanUtils.copyProperties(blogArticle, contentVO);
+                contentVO.setContent(articleContent.getContent());
+                contentVO.setModifiedTime(articleContent.getGmtModified());
+            }
+        }
 
         return contentVO;
     }
