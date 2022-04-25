@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Version 1.0
  */
 @SpringBootApplication
-@EnableSwagger2
+//@EnableSwagger2
 @MapperScan(basePackages = {"com.youlixiang.blog.mapper"})
 @EnableConfigurationProperties({OssProperties.class, EmailProperties.class})
 @EnableTransactionManagement
