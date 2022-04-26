@@ -2,12 +2,12 @@ server:
   port: 88
 spring:
   application:
-    name: blog-gateway
+    name: blog-gateway-local
   cloud:
     gateway:
       routes:
         - id: blog_route
-          uri: lb://blog-site
+          uri: lb://blog-site-local
           predicates:
             - Path=/api/**
           filters:
@@ -15,3 +15,4 @@ spring:
     nacos:
       discovery:
         server-addr: 49.233.53.179:8848
+

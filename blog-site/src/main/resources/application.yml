@@ -1,5 +1,5 @@
 spring:
   application:
-    name: blog-site
+    name: blog-site-local
   mail:
     host: smtp.qq.com

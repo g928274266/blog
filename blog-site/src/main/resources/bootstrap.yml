@@ -7,3 +7,4 @@ spring:
         group: DEFAULT_GROUP
       discovery:
         server-addr: 49.233.53.179:8848
+        ip: 10.163.222.7
