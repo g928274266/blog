@@ -41,7 +41,8 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
 
     @Override
     public Map<String, Object> listArticle(Long current, Long limit, BlogArticleVO blogArticleVO) {
-        List<BlogArticle> articleList = blogArticleMapper.listArticle(current, limit, blogArticleVO);
+        long offset = (limit * current) - limit;
+        List<BlogArticle> articleList = blogArticleMapper.listArticle(offset, limit, blogArticleVO);
 
         Map<String, Object> articleMap = new HashMap<>();
 
@@ -61,8 +62,10 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
             }).collect(Collectors.toList());
         }
 
+        Integer total = blogArticleMapper.selectCount(null);
+
         articleMap.put("blogArticleVOList", blogArticleVOList);
-        articleMap.put("total", articleList.size());
+        articleMap.put("total", total);
 
         return articleMap;
     }

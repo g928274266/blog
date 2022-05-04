@@ -30,6 +30,6 @@
             </if>
             a.`logic_deleted` = 0
         </trim>
-        limit #{current},#{limit}
+        limit #{offset},#{limit}
     </select>
 </mapper>

@@ -3,3 +3,6 @@ spring:
     name: blog-site-local
   mail:
     host: smtp.qq.com
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
